@@ -8,4 +8,5 @@ angular
     .service('queues', require('./queuesService'))
     .controller('queuesListController', require('./queuesListController'))
     .controller('queueController', require('./queueController'))
-    .directive('messageList', require('./messageListDirective'));
+    .directive('messageList', require('./messageListDirective'))
+    .directive('sendMessage', require('./sendMessagesDirective'));

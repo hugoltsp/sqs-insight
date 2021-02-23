@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>SQS Insight</title>
 
@@ -9,34 +10,45 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/bootstrap.css"/>
-    <link rel="stylesheet" href="/json-formatter.css"/>
-    <link rel="stylesheet" href="/css/app.css"/>
+    <link rel="stylesheet" href="/bootstrap.css" />
+    <link rel="stylesheet" href="/json-formatter.css" />
+    <link rel="stylesheet" href="/css/app.css" />
 </head>
 
 <body ng-app="sqsInsight" ng-cloak>
 
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body" ng-controller="queuesListController as list">
-            <uib-tabset type="tabs" justified="true">
-                <uib-tab ng-repeat="queue in list.queues" select="list.select(queue.name)" active="queue.active">
-                    <uib-tab-heading>
-                        {{queue.name}} <span class="badge">{{ queue.count }}</span>
-                    </uib-tab-heading>
-                    <div  ng-controller="queueController as qc" class="queue-actions">
-                        <button ng-click="qc.purgeQueue(queue.name)" class="btn btn-default btn-purge-queue">Purge Queue</button>
-                        <button ng-click="qc.clearQueueMessages(queue.name)" class="btn btn-default btn-clear-messages">Clear Messages</button>
-                        <button ng-click="qc.clearMessages()" class="btn btn-default btn-clear-all-messages">Clear All Messages</button>
-                    </div>
-                    <message-list queue="queue.name" count="queue.count"></message-list>
-                </uib-tab>
-            </uib-tabset>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-controller="queuesListController as list">
+                <uib-tabset type="tabs" justified="true">
+                    <uib-tab ng-repeat="queue in list.queues" select="list.select(queue.name)" active="queue.active">
+                        <uib-tab-heading>
+                            {{queue.name}} <span class="badge">{{ queue.count }}</span>
+                        </uib-tab-heading>
+                        <div ng-controller="queueController as qc" class="queue-actions">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <button class="btn btn-primary">Post Message</button>
+                                    </div>
+                                    <div class="col-sm">
+                                        <send-message queue="queue.name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <button ng-click="qc.purgeQueue(queue.name)" class="btn btn-default btn-purge-queue">Purge Queue</button>
+                            <button ng-click="qc.clearQueueMessages(queue.name)" class="btn btn-default btn-clear-messages">Clear Messages</button>
+                            <button ng-click="qc.clearMessages()" class="btn btn-default btn-clear-all-messages">Clear All Messages</button>
+                        </div>
+                        <message-list queue="queue.name" count="queue.count"></message-list>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
         </div>
     </div>
-</div>
 
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/app.js"></script>
 </body>
+
 </html>
