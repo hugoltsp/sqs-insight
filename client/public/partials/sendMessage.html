@@ -1,25 +1,4 @@
-<div class="list-group">
-    <div class="list-group-item list-group-item-warning" ng-show="0 == messages.length">No Messages.</div>
-    <div class="list-group-item" ng-repeat="message in messages">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <p><strong>MessageId:</strong> {{ message.MessageId }}</p>
-                <div class="row">
-                    <div class="col-md-4" ng-if="message.Attributes.SentTimestamp">
-                        Sent on: {{ message.Attributes.SentTimestamp | date: 'dd/MM hh:mm:ss' }}
-                    </div>
-                    <div class="col-md-4" ng-if="message.Attributes.ApproximateFirstReceiveTimestamp">
-                        Received on: {{ message.Attributes.ApproximateFirstReceiveTimestamp | date: 'dd/MM hh:mm:ss' }}
-                    </div>
-                    <div class="col-md-4" ng-if="message.Attributes.MessageGroupId">
-                        MessageGroupId: {{ message.Attributes.MessageGroupId }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel-body">
-                <pre><json-formatter json="message.Body" open="1"></json-formatter></pre>
-            </div>
-        </div>
-    </div>
+<div class="panel-body">
+    <textarea ng-model="textarea" class="ng-valid ng-dirty ng-valid-parse" />
+    <json-formatter json="message.Body" open="1"></json-formatter>
 </div>
